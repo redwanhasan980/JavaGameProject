@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="25">
+ <tileset firstgid="1" name="IICT" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="6215" columns="113">
+  <image source="IICT.jpg" width="2048" height="996"/>
+ </tileset>
+ <tileset firstgid="6216" name="NES - Super Mario Bros - Tileset" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="1554" columns="37">
+  <image source="NES - Super Mario Bros - Tileset.png" width="680" height="764"/>
+ </tileset>
+ <layer id="2" name="background" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="3" name="graphics" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJztwwENAAAIA6DHsH8J65lDhY0EAAAAAAAAAAAAAGCHrj/hmgF9Jy+2
+  </data>
+ </layer>
+ <objectgroup id="4" name="ground">
+  <object id="5" x="10.5" y="202.5" width="1"/>
+  <object id="8" x="1" y="191" width="3838" height="17.2"/>
+ </objectgroup>
+ <objectgroup id="5" name="pipes"/>
+ <objectgroup id="6" name="coins"/>
+ <objectgroup id="7" name="bricks"/>
+</map>
