@@ -7,12 +7,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.game.BananaShooter;
+import com.game.RahimulBros;
 
-public class Hud {
+public class Hud implements Disposable {
     public Stage stage;
     private Viewport viewport;
     private Integer score;
@@ -30,7 +31,7 @@ public class Hud {
         worldTimer = 300;
         timeCount =0;
         score=0;
-        viewport = new FitViewport(BananaShooter.V_WiDTH,BananaShooter.V_HEIGHT,new OrthographicCamera());
+        viewport = new FitViewport(RahimulBros.V_WiDTH, RahimulBros.V_HEIGHT,new OrthographicCamera());
         stage =new Stage(viewport,sb);
         Table table = new Table();
         table.top();
@@ -53,4 +54,7 @@ public class Hud {
 
 
 
+    public void dispose() {
+        stage.dispose();
+    }
 }
