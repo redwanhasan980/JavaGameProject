@@ -16,16 +16,16 @@ import com.game.RahimulBros;
 public class Hud implements Disposable {
     public Stage stage;
     private Viewport viewport;
-    private Integer score;
+    private static Integer score;
     private Integer worldTimer;
     private float timeCount;
 
-    Label countdownLabel;
-    Label scoreLabel;
-    Label timeLabel;
-    Label worldLabel;
-    Label bananaLabel;
-    Label labelLabel;
+   private Label countdownLabel;
+    private static Label scoreLabel;
+    private Label timeLabel;
+    private Label worldLabel;
+    private Label bananaLabel;
+    private Label labelLabel;
     public Hud(SpriteBatch sb)
     {
         worldTimer = 300;
@@ -52,7 +52,23 @@ public class Hud implements Disposable {
         stage.addActor(table);
     }
 
+public void update(float dt)
 
+{
+    timeCount+=dt;
+    if(timeCount>=1)
+    {
+        worldTimer--;
+        countdownLabel.setText(String.format("%03d",worldTimer));
+        timeCount=0;
+    }
+}
+public static void addScore(int value)
+{
+    score+=value;
+    scoreLabel.setText(String.format("%06d",score));
+
+}
 
     public void dispose() {
         stage.dispose();

@@ -8,4 +8,11 @@ public class Pipe extends InteractiveTileObject{
     public Pipe(World world, TiledMap map, Rectangle bounds) {
         super(world, map, bounds);
     }
+
+    @Override
+    public void onHeadhit() {
+
+    }
+
+
 }

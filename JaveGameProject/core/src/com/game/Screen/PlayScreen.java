@@ -2,6 +2,7 @@ package com.game.Screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,6 +22,7 @@ import com.game.RahimulBros;
 import com.game.Scenes.Hud;
 import com.game.Sprites.Rahimul;
 import com.game.Tools.B2WorldCreator;
+import com.game.Tools.worldContactListener;
 
 public class PlayScreen implements Screen
 {
@@ -39,6 +41,7 @@ public class PlayScreen implements Screen
     private World world;
     private Box2DDebugRenderer b2dr;
     private Rahimul player;
+    private Music music;
 
     public void handleInput(float dt){
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
@@ -53,6 +56,7 @@ public class PlayScreen implements Screen
     {
          handleInput(dt);
          player.update(dt);
+         hud.update(dt);
          world.step(1/60f,6,2);
          gamecam.position.x=player.b2body.getPosition().x;
          gamecam.update();
@@ -75,7 +79,10 @@ b2dr= new Box2DDebugRenderer();
    new B2WorldCreator(world,map);
     player =new Rahimul(world,this);
 
-
+world.setContactListener(new worldContactListener());
+music = RahimulBros.manager.get("audio/music/mario_music.ogg",Music.class);
+music.setLooping(true);
+music.play();
 
 }
 public TextureAtlas getAtlas()

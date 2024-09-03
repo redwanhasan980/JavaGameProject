@@ -112,8 +112,17 @@ public class Rahimul extends Sprite {
         FixtureDef fdef =new FixtureDef();
         CircleShape shape =new CircleShape();
         shape.setRadius(14/RahimulBros.PPM);
+        fdef.filter.categoryBits=RahimulBros.MARIO_BIT;
+        fdef.filter.maskBits=RahimulBros.DEFAULT_BIT|RahimulBros.BRICK_BIT|RahimulBros.COINT_BIT;
+
         fdef.shape=shape;
         b2body.createFixture(fdef);
+        EdgeShape head =new EdgeShape();
+        head.set(new Vector2(-4/RahimulBros.PPM,14/RahimulBros.PPM),new Vector2(4/RahimulBros.PPM,14/RahimulBros.PPM));
+        fdef.shape=head;
+        b2body.createFixture(fdef).setUserData("head");
+        fdef.isSensor=true;
+
 
     }
 
