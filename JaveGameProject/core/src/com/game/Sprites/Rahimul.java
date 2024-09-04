@@ -33,9 +33,9 @@ public class Rahimul extends Sprite {
     private float stateTimer;
     private boolean runningRight;
 
-    public Rahimul(World world , PlayScreen screen){
+    public Rahimul(PlayScreen screen){
         super(screen.getAtlas().findRegion("little_mario"));
-        this.world=world;
+        this.world=screen.getWorld();
         defineRahimul();
         currentState =State.STANDING;
         previousState=State.STANDING;
@@ -106,14 +106,15 @@ public class Rahimul extends Sprite {
     public void defineRahimul()
     {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(32/ RahimulBros.PPM,32/RahimulBros.PPM);
+        bdef.position.set(64/ RahimulBros.PPM,64/RahimulBros.PPM);
         bdef.type=BodyDef.BodyType.DynamicBody;
         b2body=world.createBody(bdef);
         FixtureDef fdef =new FixtureDef();
         CircleShape shape =new CircleShape();
         shape.setRadius(14/RahimulBros.PPM);
         fdef.filter.categoryBits=RahimulBros.MARIO_BIT;
-        fdef.filter.maskBits=RahimulBros.DEFAULT_BIT|RahimulBros.BRICK_BIT|RahimulBros.COINT_BIT;
+        fdef.filter.maskBits=RahimulBros.DEFAULT_BIT|RahimulBros.BRICK_BIT|RahimulBros.COINT_BIT|
+                RahimulBros.OBJECT_BIT|RahimulBros.ENEMY_BIT|RahimulBros.ENEMY_HEAD_BIT;
 
         fdef.shape=shape;
         b2body.createFixture(fdef);

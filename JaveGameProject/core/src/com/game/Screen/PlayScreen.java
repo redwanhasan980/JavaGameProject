@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.game.RahimulBros;
 import com.game.Scenes.Hud;
+import com.game.Sprites.Goomba;
 import com.game.Sprites.Rahimul;
 import com.game.Tools.B2WorldCreator;
 import com.game.Tools.worldContactListener;
@@ -42,6 +43,7 @@ public class PlayScreen implements Screen
     private Box2DDebugRenderer b2dr;
     private Rahimul player;
     private Music music;
+    private Goomba goomba;
 
     public void handleInput(float dt){
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
@@ -56,6 +58,7 @@ public class PlayScreen implements Screen
     {
          handleInput(dt);
          player.update(dt);
+         goomba.update(dt);
          hud.update(dt);
          world.step(1/60f,6,2);
          gamecam.position.x=player.b2body.getPosition().x;
@@ -76,13 +79,14 @@ public class PlayScreen implements Screen
 
 world=new World(new Vector2(0,-10),true);
 b2dr= new Box2DDebugRenderer();
-   new B2WorldCreator(world,map);
-    player =new Rahimul(world,this);
+   new B2WorldCreator(this);
+    player =new Rahimul(this);
 
 world.setContactListener(new worldContactListener());
 music = RahimulBros.manager.get("audio/music/mario_music.ogg",Music.class);
 music.setLooping(true);
 music.play();
+goomba = new Goomba(this,.32f,.32f);
 
 }
 public TextureAtlas getAtlas()
@@ -99,10 +103,11 @@ public TextureAtlas getAtlas()
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         rander.render();
-        b2dr.render(world,gamecam.combined);
+        //b2dr.render(world,gamecam.combined);
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
+        goomba.draw(game.batch);
         game.batch.end();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
@@ -113,8 +118,14 @@ public TextureAtlas getAtlas()
     public void resize(int width, int height) {
         gameport.update(width,height);
     }
-
-
+public TiledMap getMap()
+{
+    return map;
+}
+public World getWorld()
+{
+     return world;
+}
     public void pause() {
 
     }
