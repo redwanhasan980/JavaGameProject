@@ -2,6 +2,7 @@ package com.game.Screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -15,6 +16,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -25,6 +28,10 @@ import com.game.Sprites.Goomba;
 import com.game.Sprites.Rahimul;
 import com.game.Tools.B2WorldCreator;
 import com.game.Tools.worldContactListener;
+
+
+import java.util.PriorityQueue;
+
 
 public class PlayScreen implements Screen
 {
@@ -59,47 +66,52 @@ public class PlayScreen implements Screen
     public void update(float dt)
     {
          handleInput(dt);
+
          player.update(dt);
          for(Enemy enemy : creator.getGoombas())
+         {
              enemy.update(dt);
+             if(enemy.getX()<player.getX()+224/RahimulBros.PPM)
+                 enemy.b2body.setActive(true);
+         }
+
          hud.update(dt);
          world.step(1/60f,6,2);
          gamecam.position.x=player.b2body.getPosition().x;
          gamecam.update();
          rander.setView(gamecam);
     }
-    public PlayScreen(RahimulBros game)
+    public PlayScreen(RahimulBros game) {
+        atlas = new TextureAtlas("Mario_and_Enemies.pack");
+        gamecam = new OrthographicCamera();
+        gameport = new StretchViewport(RahimulBros.V_WiDTH / RahimulBros.PPM, RahimulBros.V_HEIGHT / RahimulBros.PPM, gamecam);
+        hud = new Hud(game.batch);
+        maploader = new TmxMapLoader();
+        map = maploader.load("map.tmx");
+        rander = new OrthogonalTiledMapRenderer(map, 1 / RahimulBros.PPM);
+        gamecam.position.set(gameport.getWorldWidth() / 2, gameport.getWorldHeight() / 2, 0);
+        this.game = game;
 
-{ atlas =new TextureAtlas("Mario_and_Enemies.pack");
-    gamecam = new OrthographicCamera();
-    gameport= new StretchViewport(RahimulBros.V_WiDTH/ RahimulBros.PPM, RahimulBros.V_HEIGHT/RahimulBros.PPM,gamecam);
-    hud = new Hud(game.batch);
-    maploader = new TmxMapLoader();
-    map = maploader.load("map.tmx");
-    rander = new OrthogonalTiledMapRenderer(map,1/RahimulBros.PPM);
-    gamecam.position.set(gameport.getWorldWidth()/2 , gameport.getWorldHeight()/2, 0);
-     this.game = game;
+        world = new World(new Vector2(0, -10), true);
+        b2dr = new Box2DDebugRenderer();
+        creator = new B2WorldCreator(this);
+        player = new Rahimul(this);
 
-world=new World(new Vector2(0,-10),true);
-b2dr= new Box2DDebugRenderer();
-  creator= new B2WorldCreator(this);
-    player =new Rahimul(this);
-
-world.setContactListener(new worldContactListener());
-music = RahimulBros.manager.get("audio/music/mario_music.ogg",Music.class);
-music.setLooping(true);
-music.play();
-
-
-}
+        world.setContactListener(new worldContactListener());
+        music = RahimulBros.manager.get("audio/music/mario_music.ogg", Music.class);
+        music.setLooping(true);
+        music.play();
+    }
 public TextureAtlas getAtlas()
 {
     return atlas;
 }
+
+
+    @Override
     public void show() {
 
     }
-
 
     public void render(float delta) {
         update(delta);
@@ -112,6 +124,7 @@ public TextureAtlas getAtlas()
         player.draw(game.batch);
         for(Enemy enemy : creator.getGoombas())
             enemy.draw(game.batch);
+
         game.batch.end();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
