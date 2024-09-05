@@ -1,5 +1,6 @@
 package com.game.Tools;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.game.RahimulBros;
 import com.game.Sprites.Enemy;
@@ -29,6 +30,14 @@ public class worldContactListener implements ContactListener {
                 else
                     ((Enemy)fixB.getUserData()).hitOnHead();
                 break;
+            case RahimulBros.ENEMY_BIT | RahimulBros.OBJECT_BIT:
+                if(fixA.getFilterData().categoryBits == RahimulBros.ENEMY_BIT)
+                    ((Enemy)fixA.getUserData()).reverseVelocity(true,false);
+                else
+                    ((Enemy)fixB.getUserData()).reverseVelocity(true,false);
+                break;
+            case RahimulBros.ENEMY_BIT | RahimulBros.MARIO_BIT:
+                Gdx.app.log("Mario","DIED");
         }
 
     }

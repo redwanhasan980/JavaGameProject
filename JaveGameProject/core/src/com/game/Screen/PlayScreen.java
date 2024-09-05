@@ -86,7 +86,7 @@ world.setContactListener(new worldContactListener());
 music = RahimulBros.manager.get("audio/music/mario_music.ogg",Music.class);
 music.setLooping(true);
 music.play();
-goomba = new Goomba(this,.32f,.32f);
+goomba = new Goomba(this,5.64f,.32f);
 
 }
 public TextureAtlas getAtlas()
@@ -103,7 +103,7 @@ public TextureAtlas getAtlas()
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         rander.render();
-        //b2dr.render(world,gamecam.combined);
+        b2dr.render(world,gamecam.combined);
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);

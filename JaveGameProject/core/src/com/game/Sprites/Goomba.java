@@ -45,7 +45,7 @@ public class Goomba extends Enemy{
             stateTime = 0;
         }
         else if(!destroyed) {
-
+          b2body.setLinearVelocity(velocity);
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
             setRegion((TextureRegion) walkAnimation.getKeyFrame(stateTime, true));
         }
@@ -86,7 +86,11 @@ public class Goomba extends Enemy{
         fdef.filter.categoryBits = RahimulBros.ENEMY_HEAD_BIT;
         b2body.createFixture(fdef).setUserData(this);
     }
-
+  public void draw(Batch batch)
+  {
+       if(!destroyed||stateTime<1 )
+           super.draw(batch);
+  }
     @Override
     public void hitOnHead() {
         setToDestroy = true;
