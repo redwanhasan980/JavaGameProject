@@ -17,11 +17,12 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.game.RahimulBros;
+import com.game.Scenes.Hud;
 import com.game.Screen.PlayScreen;
 
 
 public class Rahimul extends Sprite {
-    public enum State {FALLING,JUMPING,STANDING,RUNNING};
+    public enum State {FALLING,JUMPING,STANDING,RUNNING,DEAD};
     public State currentState;
     public State previousState;
 
@@ -32,6 +33,8 @@ public class Rahimul extends Sprite {
     private Animation marioJump;
     private float stateTimer;
     private boolean runningRight;
+    private TextureRegion marioDead;
+    private boolean marioIsDead;
 
     public Rahimul(PlayScreen screen){
         super(screen.getAtlas().findRegion("little_mario"));
@@ -51,6 +54,7 @@ public class Rahimul extends Sprite {
         marioJump = new Animation(0.1f,frames);
 
         mariostand = new TextureRegion(getTexture(),2,22,32,32);
+        marioDead = new TextureRegion(getTexture(),194,22,32,32);
         setBounds(0,0,32/ RahimulBros.PPM,32/RahimulBros.PPM);
         setRegion(mariostand);
     }
@@ -64,7 +68,9 @@ public class Rahimul extends Sprite {
         currentState=getState();
         TextureRegion region;
         switch ( currentState)
-        {
+        {   case DEAD:
+               region=marioDead;
+               break;
             case JUMPING:
                 region= (TextureRegion) marioJump.getKeyFrame(stateTimer);
                 break;
@@ -91,7 +97,9 @@ public class Rahimul extends Sprite {
         return region;
     }
     public State getState()
-    {if(b2body.getLinearVelocity().y>0  ||(b2body.getLinearVelocity().y<0 &&previousState==State.JUMPING) )
+    {   if(marioIsDead)
+        return State.DEAD;
+        else if(b2body.getLinearVelocity().y>0  ||(b2body.getLinearVelocity().y<0 &&previousState==State.JUMPING) )
         return State.JUMPING;
         else if(b2body.getLinearVelocity().y<0)
             return State.FALLING;
@@ -104,8 +112,20 @@ public class Rahimul extends Sprite {
 
     }
     public void hit()
-    {
+    {    Hud.removeLife();
+        if(Hud.getLife()>0)
         RahimulBros.manager.get("audio/sounds/powerdown.wav", Sound.class).play();
+        else
+        {
+            PlayScreen.music.stop();
+            RahimulBros.manager.get("audio/sounds/mariodie.wav", Sound.class).play();
+            marioIsDead=true;
+            Filter filter = new Filter();
+            filter.maskBits=RahimulBros.NOTHING_BIT;
+            for(Fixture fixture:b2body.getFixtureList())
+                 fixture.setFilterData(filter);
+            b2body.applyLinearImpulse(new Vector2(0,4f),b2body.getWorldCenter(),true);
+        }
     }
     public void defineRahimul()
     {

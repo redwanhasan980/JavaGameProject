@@ -19,7 +19,7 @@ public class Brick extends InteractiveTileObject{
     public void onHeadhit() {
       setCategoryFilter(RahimulBros.DESTROYED_BIT);
       getCell().setTile(null);
-        Hud.addScore(200);
+        Hud.addScore(100);
         RahimulBros.manager.get("audio/sounds/breakblock.wav", Sound.class).play();
     }
 }

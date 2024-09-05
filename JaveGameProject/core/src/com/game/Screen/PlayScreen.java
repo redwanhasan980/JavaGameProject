@@ -51,17 +51,18 @@ public class PlayScreen implements Screen
     private Box2DDebugRenderer b2dr;
     private B2WorldCreator creator;
     private Rahimul player;
-    private Music music;
+    public static Music music;
 
 
     public void handleInput(float dt){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
-            player.b2body.applyLinearImpulse(new Vector2(0,4f),player.b2body.getWorldCenter(),true);
-           if(Gdx.input.isKeyPressed(Input.Keys.D)&& player.b2body.getLinearVelocity().x<=2)
-               player.b2body.applyLinearImpulse(new Vector2(0.1f,0),player.b2body.getWorldCenter(),true);
-        if(Gdx.input.isKeyPressed(Input.Keys.A)&& player.b2body.getLinearVelocity().x>=-2)
-            player.b2body.applyLinearImpulse(new Vector2(-0.1f,0),player.b2body.getWorldCenter(),true);
-
+        if(player.currentState!= Rahimul.State.DEAD) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+                player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
+            if (Gdx.input.isKeyPressed(Input.Keys.D) && player.b2body.getLinearVelocity().x <= 2)
+                player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
+            if (Gdx.input.isKeyPressed(Input.Keys.A) && player.b2body.getLinearVelocity().x >= -2)
+                player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
+        }
     }
     public void update(float dt)
     {
@@ -77,7 +78,10 @@ public class PlayScreen implements Screen
 
          hud.update(dt);
          world.step(1/60f,6,2);
-         gamecam.position.x=player.b2body.getPosition().x;
+         if(player.currentState!= Rahimul.State.DEAD) {
+             gamecam.position.x=player.b2body.getPosition().x;
+         }
+
          gamecam.update();
          rander.setView(gamecam);
     }

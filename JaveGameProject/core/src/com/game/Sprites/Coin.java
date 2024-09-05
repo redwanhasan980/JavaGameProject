@@ -26,7 +26,7 @@ public class Coin extends InteractiveTileObject{
     public void onHeadhit() {
         setCategoryFilter(RahimulBros.DESTROYED_BIT);
        getCell().setTile(tileSet.getTile(BLANK_COIN));
-        Hud.addScore(100);
+        Hud.addScore(200);
         RahimulBros.manager.get("audio/sounds/coin.wav", Sound.class).play();
 
     }

@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.game.RahimulBros;
+import com.game.Scenes.Hud;
 import com.game.Screen.PlayScreen;
 
 public class Goomba extends Enemy{
@@ -94,6 +95,7 @@ public class Goomba extends Enemy{
     @Override
     public void hitOnHead() {
         setToDestroy = true;
+        Hud.addScore(500);
         RahimulBros.manager.get("audio/sounds/stomp.wav", Sound.class).play();
     }
 }
