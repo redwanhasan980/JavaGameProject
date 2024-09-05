@@ -5,14 +5,17 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import com.game.RahimulBros;
 import com.game.Screen.PlayScreen;
-import com.game.Sprites.Brick;
-import com.game.Sprites.Coin;
-import com.game.Sprites.Ground;
-import com.game.Sprites.Pipe;
+import com.game.Sprites.*;
+
+
 
 public class B2WorldCreator {
+
+
+    private Array<Goomba> goombas;
     public B2WorldCreator(PlayScreen screen)
     {
           World world = screen.getWorld();
@@ -59,5 +62,15 @@ public class B2WorldCreator {
             new Coin(screen,rect);
 
         }
+        //goombas
+        goombas=new Array<Goomba>();
+        for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            goombas.add(new Goomba(screen,rect.getX()/RahimulBros.PPM, rect.getY()/RahimulBros.PPM));
+
+        }
+    }
+    public Array<Goomba> getGoombas() {
+        return goombas;
     }
 }

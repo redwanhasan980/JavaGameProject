@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.game.RahimulBros;
 import com.game.Scenes.Hud;
+import com.game.Sprites.Enemy;
 import com.game.Sprites.Goomba;
 import com.game.Sprites.Rahimul;
 import com.game.Tools.B2WorldCreator;
@@ -41,9 +42,10 @@ public class PlayScreen implements Screen
 
     private World world;
     private Box2DDebugRenderer b2dr;
+    private B2WorldCreator creator;
     private Rahimul player;
     private Music music;
-    private Goomba goomba;
+
 
     public void handleInput(float dt){
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
@@ -58,7 +60,8 @@ public class PlayScreen implements Screen
     {
          handleInput(dt);
          player.update(dt);
-         goomba.update(dt);
+         for(Enemy enemy : creator.getGoombas())
+             enemy.update(dt);
          hud.update(dt);
          world.step(1/60f,6,2);
          gamecam.position.x=player.b2body.getPosition().x;
@@ -79,14 +82,14 @@ public class PlayScreen implements Screen
 
 world=new World(new Vector2(0,-10),true);
 b2dr= new Box2DDebugRenderer();
-   new B2WorldCreator(this);
+  creator= new B2WorldCreator(this);
     player =new Rahimul(this);
 
 world.setContactListener(new worldContactListener());
 music = RahimulBros.manager.get("audio/music/mario_music.ogg",Music.class);
 music.setLooping(true);
 music.play();
-goomba = new Goomba(this,5.64f,.32f);
+
 
 }
 public TextureAtlas getAtlas()
@@ -107,7 +110,8 @@ public TextureAtlas getAtlas()
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        goomba.draw(game.batch);
+        for(Enemy enemy : creator.getGoombas())
+            enemy.draw(game.batch);
         game.batch.end();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
