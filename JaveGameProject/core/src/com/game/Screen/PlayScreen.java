@@ -104,7 +104,7 @@ public class PlayScreen implements Screen
         world.setContactListener(new worldContactListener());
         music = RahimulBros.manager.get("audio/music/mario_music.ogg", Music.class);
         music.setLooping(true);
-        music.setVolume(music.getVolume()-0.7f);
+        music.setVolume(0.35f);
         music.play();
     }
 public TextureAtlas getAtlas()
@@ -133,6 +133,11 @@ public TextureAtlas getAtlas()
         game.batch.end();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+        if(gameOver())
+        {
+            game.setScreen(new GameOverScreen(game));
+            dispose();
+        }
 
     }
 
@@ -161,7 +166,14 @@ public World getWorld()
     public void hide() {
 
     }
-
+    public boolean gameOver()
+    {
+         if(player.currentState == Rahimul.State.DEAD && player.getStateTimer()>3){
+             return true;
+         }
+         else
+             return false;
+    }
 
     public void dispose() {
         map.dispose();
