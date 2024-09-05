@@ -28,6 +28,6 @@ public class Coin extends InteractiveTileObject{
        getCell().setTile(tileSet.getTile(BLANK_COIN));
         Hud.addScore(100);
         RahimulBros.manager.get("audio/sounds/coin.wav", Sound.class).play();
-       
+
     }
 }

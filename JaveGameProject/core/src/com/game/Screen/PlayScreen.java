@@ -100,6 +100,7 @@ public class PlayScreen implements Screen
         world.setContactListener(new worldContactListener());
         music = RahimulBros.manager.get("audio/music/mario_music.ogg", Music.class);
         music.setLooping(true);
+        music.setVolume(music.getVolume()-0.7f);
         music.play();
     }
 public TextureAtlas getAtlas()

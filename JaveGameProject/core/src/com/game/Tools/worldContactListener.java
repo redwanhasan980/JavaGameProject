@@ -48,7 +48,11 @@ public class worldContactListener implements ContactListener {
                 break;
 
             case RahimulBros.ENEMY_BIT | RahimulBros.MARIO_BIT:
-                Gdx.app.log("Mario","DIED");
+                if(fixA.getFilterData().categoryBits == RahimulBros.MARIO_BIT)
+                    ((Rahimul)fixA.getUserData()).hit();
+                else
+                    ((Rahimul)fixB.getUserData()).hit();
+                break;
         }
 
     }

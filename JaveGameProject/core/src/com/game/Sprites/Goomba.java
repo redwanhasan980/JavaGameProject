@@ -75,10 +75,10 @@ public class Goomba extends Enemy{
         //Create the Head here:
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-3, 8).scl(1 / RahimulBros.PPM);
-        vertice[1] = new Vector2(3, 8).scl(1 / RahimulBros.PPM);
-        vertice[2] = new Vector2(-3, 3).scl(1 / RahimulBros.PPM);
-        vertice[3] = new Vector2(3, 3).scl(1 / RahimulBros.PPM);
+        vertice[0] = new Vector2(-4, 11).scl(1 / RahimulBros.PPM);
+        vertice[1] = new Vector2(4, 11).scl(1 / RahimulBros.PPM);
+        vertice[2] = new Vector2(-5, 2).scl(1 / RahimulBros.PPM);
+        vertice[3] = new Vector2(5, 2).scl(1 / RahimulBros.PPM);
         head.set(vertice);
 
         fdef.shape = head;
@@ -94,5 +94,6 @@ public class Goomba extends Enemy{
     @Override
     public void hitOnHead() {
         setToDestroy = true;
+        RahimulBros.manager.get("audio/sounds/stomp.wav", Sound.class).play();
     }
 }

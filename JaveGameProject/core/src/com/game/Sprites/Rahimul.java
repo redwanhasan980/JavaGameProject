@@ -103,6 +103,10 @@ public class Rahimul extends Sprite {
 
 
     }
+    public void hit()
+    {
+        RahimulBros.manager.get("audio/sounds/powerdown.wav", Sound.class).play();
+    }
     public void defineRahimul()
     {
         BodyDef bdef = new BodyDef();
@@ -117,7 +121,7 @@ public class Rahimul extends Sprite {
                 RahimulBros.OBJECT_BIT|RahimulBros.ENEMY_BIT|RahimulBros.ENEMY_HEAD_BIT;
 
         fdef.shape=shape;
-        b2body.createFixture(fdef);
+        b2body.createFixture(fdef).setUserData(this);
         EdgeShape head =new EdgeShape();
         head.set(new Vector2(-4/RahimulBros.PPM,14/RahimulBros.PPM),new Vector2(4/RahimulBros.PPM,14/RahimulBros.PPM));
         fdef.shape=head;
