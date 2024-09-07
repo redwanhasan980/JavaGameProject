@@ -34,7 +34,8 @@ public class Hud implements Disposable {
         worldTimer = 300;
         timeCount =0;
         score=0;
-        life=3;
+        life=3
+        ;
         viewport = new FitViewport(RahimulBros.V_WiDTH, RahimulBros.V_HEIGHT,new OrthographicCamera());
         stage =new Stage(viewport,sb);
         Table table = new Table();

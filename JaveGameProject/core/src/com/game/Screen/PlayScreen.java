@@ -69,7 +69,7 @@ public class PlayScreen implements Screen
          handleInput(dt);
 
          player.update(dt);
-         for(Enemy enemy : creator.getGoombas())
+         for(Enemy enemy : creator.getEnemies())
          {
              enemy.update(dt);
              if(enemy.getX()<player.getX()+224/RahimulBros.PPM)
@@ -127,7 +127,7 @@ public TextureAtlas getAtlas()
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        for(Enemy enemy : creator.getGoombas())
+        for(Enemy enemy : creator.getEnemies())
             enemy.draw(game.batch);
 
         game.batch.end();

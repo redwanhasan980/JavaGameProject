@@ -112,11 +112,15 @@ public class Rahimul extends Sprite {
 
     }
     public void hit()
-    {    Hud.removeLife();
-        if(Hud.getLife()>0)
-        RahimulBros.manager.get("audio/sounds/powerdown.wav", Sound.class).play();
-        else
+    {
+        if(Hud.getLife()>0&&!RahimulBros.noLifeReduce)
         {
+            Hud.removeLife();
+            RahimulBros.manager.get("audio/sounds/powerdown.wav", Sound.class).play();
+        }
+
+        else if(!RahimulBros.noLifeReduce)
+        {          Hud.removeLife();
             PlayScreen.music.stop();
             RahimulBros.manager.get("audio/sounds/mariodie.wav", Sound.class).play();
             marioIsDead=true;

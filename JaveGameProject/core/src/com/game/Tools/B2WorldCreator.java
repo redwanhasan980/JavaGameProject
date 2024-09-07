@@ -16,6 +16,7 @@ public class B2WorldCreator {
 
 
     private Array<Goomba> goombas;
+    private Array<Turtle> turtles;
     public B2WorldCreator(PlayScreen screen)
     {
           World world = screen.getWorld();
@@ -69,8 +70,20 @@ public class B2WorldCreator {
             goombas.add(new Goomba(screen,rect.getX()/RahimulBros.PPM, rect.getY()/RahimulBros.PPM));
 
         }
+        turtles=new Array<Turtle>();
+        for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            turtles.add(new Turtle(screen,rect.getX()/RahimulBros.PPM, rect.getY()/RahimulBros.PPM));
+
+        }
     }
     public Array<Goomba> getGoombas() {
         return goombas;
+    }
+    public Array<Enemy> getEnemies(){
+        Array<Enemy>enemies=new Array<Enemy>();
+        enemies.addAll(goombas);
+        enemies.addAll(turtles);
+        return enemies;
     }
 }
