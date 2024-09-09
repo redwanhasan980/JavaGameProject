@@ -12,7 +12,9 @@ import com.game.RahimulBros;
 import com.game.Screen.PlayScreen;
 
 public class Turtle extends Enemy{
-    public enum State {WALKING,SHELL};
+    public static final int KickLeft=-2;
+    public static final int KickRight=2;
+    public enum State {WALKING,SHELL,MOVING_SHELL};
     public State currentState;
     public State previousState;
     private float stateTime;
@@ -65,7 +67,7 @@ public class Turtle extends Enemy{
         head.set(vertice);
 
         fdef.shape = head;
-        fdef.restitution = 0.5f;
+        fdef.restitution = 1.5f;
         fdef.filter.categoryBits = RahimulBros.ENEMY_HEAD_BIT;
         b2body.createFixture(fdef).setUserData(this);
     }
@@ -75,6 +77,7 @@ public class Turtle extends Enemy{
 
         switch (currentState){
             case SHELL:
+            case MOVING_SHELL:
                 region = shell;
                 break;
             case WALKING:
@@ -115,15 +118,28 @@ public class Turtle extends Enemy{
     }
 
     @Override
-    public void hitOnHead() {
+    public void hitOnHead(Rahimul rahimul) {
         if(currentState != State.SHELL) {
         currentState=State.SHELL;
         velocity.x=0;
         }
+        else
+        {
+            Kick(rahimul.getX()<=this.getX()?KickRight:KickLeft);
+        }
 
     }
 
+public void Kick(int speed){
+        velocity.x=speed;
+        currentState=State.MOVING_SHELL;
+}
 
+
+public State getCurrentState()
+{
+    return currentState;
+}
 
 
 }

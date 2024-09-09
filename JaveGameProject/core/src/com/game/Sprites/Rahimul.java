@@ -111,15 +111,18 @@ public class Rahimul extends Sprite {
 
 
     }
-    public void hit()
+    public void hit(Enemy enemy)
+    { if(enemy instanceof Turtle &&((Turtle)enemy).getCurrentState()== Turtle.State.SHELL)
     {
-        if(Hud.getLife()>0&&!RahimulBros.noLifeReduce)
+        ((Turtle)enemy).Kick(this.getX()<=enemy.getX()?Turtle.KickRight:Turtle.KickLeft);
+    }
+        else if(Hud.getLife()>1)
         {
             Hud.removeLife();
             RahimulBros.manager.get("audio/sounds/powerdown.wav", Sound.class).play();
         }
 
-        else if(!RahimulBros.noLifeReduce)
+        else
         {          Hud.removeLife();
             PlayScreen.music.stop();
             RahimulBros.manager.get("audio/sounds/mariodie.wav", Sound.class).play();

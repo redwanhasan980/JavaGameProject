@@ -26,9 +26,9 @@ public class worldContactListener implements ContactListener {
         {
             case RahimulBros.ENEMY_HEAD_BIT | RahimulBros.MARIO_BIT:
                 if(fixA.getFilterData().categoryBits == RahimulBros.ENEMY_HEAD_BIT)
-                    ((Enemy)fixA.getUserData()).hitOnHead();
+                    ((Enemy)fixA.getUserData()).hitOnHead((Rahimul)fixB.getUserData());
                 else
-                    ((Enemy)fixB.getUserData()).hitOnHead();
+                    ((Enemy)fixB.getUserData()).hitOnHead((Rahimul)fixA.getUserData());
                 break;
             case RahimulBros.ENEMY_BIT | RahimulBros.OBJECT_BIT:
                 if(fixA.getFilterData().categoryBits == RahimulBros.ENEMY_BIT)
@@ -49,9 +49,9 @@ public class worldContactListener implements ContactListener {
 
             case RahimulBros.ENEMY_BIT | RahimulBros.MARIO_BIT:
                 if(fixA.getFilterData().categoryBits == RahimulBros.MARIO_BIT)
-                    ((Rahimul)fixA.getUserData()).hit();
+                    ((Rahimul)fixA.getUserData()).hit((Enemy)fixB.getUserData());
                 else
-                    ((Rahimul)fixB.getUserData()).hit();
+                    ((Rahimul)fixB.getUserData()).hit((Enemy)fixA.getUserData());
                 break;
         }
 

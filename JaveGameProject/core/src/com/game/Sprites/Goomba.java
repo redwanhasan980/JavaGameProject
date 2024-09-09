@@ -93,7 +93,7 @@ public class Goomba extends Enemy{
            super.draw(batch);
   }
     @Override
-    public void hitOnHead() {
+    public void hitOnHead(Rahimul rahimul) {
         setToDestroy = true;
         Hud.addScore(500);
         RahimulBros.manager.get("audio/sounds/stomp.wav", Sound.class).play();
