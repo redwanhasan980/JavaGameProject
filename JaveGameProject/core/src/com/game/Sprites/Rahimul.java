@@ -137,7 +137,7 @@ public class Rahimul extends Sprite {
     public void defineRahimul()
     {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(64/ RahimulBros.PPM,64/RahimulBros.PPM);
+        bdef.position.set(274/ RahimulBros.PPM,64/RahimulBros.PPM);
         bdef.type=BodyDef.BodyType.DynamicBody;
         b2body=world.createBody(bdef);
         FixtureDef fdef =new FixtureDef();
@@ -145,7 +145,7 @@ public class Rahimul extends Sprite {
         shape.setRadius(14/RahimulBros.PPM);
         fdef.filter.categoryBits=RahimulBros.MARIO_BIT;
         fdef.filter.maskBits=RahimulBros.DEFAULT_BIT|RahimulBros.BRICK_BIT|RahimulBros.COINT_BIT|
-                RahimulBros.OBJECT_BIT|RahimulBros.ENEMY_BIT|RahimulBros.ENEMY_HEAD_BIT;
+                RahimulBros.OBJECT_BIT|RahimulBros.ENEMY_BIT|RahimulBros.ENEMY_HEAD_BIT|RahimulBros.LEVEL_BIT;
 
         fdef.shape=shape;
         b2body.createFixture(fdef).setUserData(this);

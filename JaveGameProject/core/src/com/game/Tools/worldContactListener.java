@@ -3,11 +3,13 @@ package com.game.Tools;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.game.RahimulBros;
+import com.game.Screen.PlayScreen;
 import com.game.Sprites.Enemy;
 import com.game.Sprites.InteractiveTileObject;
 import com.game.Sprites.Rahimul;
 
 public class worldContactListener implements ContactListener {
+
     @Override
     public void beginContact(Contact contact) {
         Fixture fixA=contact.getFixtureA();
@@ -22,6 +24,8 @@ public class worldContactListener implements ContactListener {
                 ((InteractiveTileObject) object.getUserData()).onHeadhit();
             }
         }
+        if(fixA.getFilterData().categoryBits==RahimulBros.MARIO_BIT||fixB.getFilterData().categoryBits==RahimulBros.MARIO_BIT)
+            PlayScreen.jumpCount=2;
         switch (cDef)
         {
             case RahimulBros.ENEMY_HEAD_BIT | RahimulBros.MARIO_BIT:
@@ -43,8 +47,8 @@ public class worldContactListener implements ContactListener {
                     ((Enemy)fixB.getUserData()).reverseVelocity(true,false);
                 break;
             case RahimulBros.ENEMY_BIT | RahimulBros.ENEMY_BIT:
-                ((Enemy)fixA.getUserData()).reverseVelocity(true,false);
-                ((Enemy)fixB.getUserData()).reverseVelocity(true,false);
+                ((Enemy)fixA.getUserData()).onEnemyHit((Enemy)fixB.getUserData());
+                ((Enemy)fixB.getUserData()).onEnemyHit((Enemy)fixA.getUserData());
                 break;
 
             case RahimulBros.ENEMY_BIT | RahimulBros.MARIO_BIT:
@@ -53,6 +57,12 @@ public class worldContactListener implements ContactListener {
                 else
                     ((Rahimul)fixB.getUserData()).hit((Enemy)fixA.getUserData());
                 break;
+            case RahimulBros.LEVEL_BIT | RahimulBros.MARIO_BIT:
+                RahimulBros.changeLevel=true;
+                break;
+
+
+
         }
 
     }

@@ -76,6 +76,11 @@ public class B2WorldCreator {
             turtles.add(new Turtle(screen,rect.getX()/RahimulBros.PPM, rect.getY()/RahimulBros.PPM));
 
         }
+        for (MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            new levelDest(screen,rect);
+        }
+
     }
     public Array<Goomba> getGoombas() {
         return goombas;

@@ -76,8 +76,8 @@ public class Goomba extends Enemy{
         //Create the Head here:
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-4, 11).scl(1 / RahimulBros.PPM);
-        vertice[1] = new Vector2(4, 11).scl(1 / RahimulBros.PPM);
+        vertice[0] = new Vector2(-4.6f, 11).scl(1 / RahimulBros.PPM);
+        vertice[1] = new Vector2(4.6f, 11).scl(1 / RahimulBros.PPM);
         vertice[2] = new Vector2(-5, 2).scl(1 / RahimulBros.PPM);
         vertice[3] = new Vector2(5, 2).scl(1 / RahimulBros.PPM);
         head.set(vertice);
@@ -92,6 +92,14 @@ public class Goomba extends Enemy{
        if(!destroyed||stateTime<1 )
            super.draw(batch);
   }
+    public void onEnemyHit(Enemy enemy) {
+        if(enemy instanceof Turtle &&((Turtle)enemy).currentState==Turtle.State.MOVING_SHELL)
+        {    RahimulBros.manager.get("audio/sounds/stomp.wav", Sound.class).play();
+            setToDestroy=true;
+        }
+        else
+            reverseVelocity(true,false);
+    }
     @Override
     public void hitOnHead(Rahimul rahimul) {
         setToDestroy = true;

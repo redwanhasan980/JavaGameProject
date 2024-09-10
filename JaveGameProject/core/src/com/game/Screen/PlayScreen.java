@@ -40,8 +40,10 @@ public class PlayScreen implements Screen
 
 
     private Hud hud;
+
     private TmxMapLoader maploader;
     private TiledMap map;
+
     private OrthogonalTiledMapRenderer rander;
 
     private OrthographicCamera gamecam;
@@ -52,12 +54,15 @@ public class PlayScreen implements Screen
     private B2WorldCreator creator;
     private Rahimul player;
     public static Music music;
-
+    public static int jumpCount=2;
 
     public void handleInput(float dt){
         if(player.currentState!= Rahimul.State.DEAD) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)&& player.b2body.getLinearVelocity().y<1&&jumpCount>0) {
+
                 player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
+                jumpCount--;
+            }
             if (Gdx.input.isKeyPressed(Input.Keys.D) && player.b2body.getLinearVelocity().x <= 2)
                 player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
             if (Gdx.input.isKeyPressed(Input.Keys.A) && player.b2body.getLinearVelocity().x >= -2)
@@ -86,13 +91,19 @@ public class PlayScreen implements Screen
          rander.setView(gamecam);
     }
     public PlayScreen(RahimulBros game) {
+
         atlas = new TextureAtlas("Mario_and_Enemies.pack");
         gamecam = new OrthographicCamera();
         gameport = new StretchViewport(RahimulBros.V_WiDTH / RahimulBros.PPM, RahimulBros.V_HEIGHT / RahimulBros.PPM, gamecam);
         hud = new Hud(game.batch);
         maploader = new TmxMapLoader();
+        if(RahimulBros.Level==1)
         map = maploader.load("map.tmx");
-        rander = new OrthogonalTiledMapRenderer(map, 1 / RahimulBros.PPM);
+        else if(RahimulBros.Level==2)
+            map = maploader.load("level2.tmx");
+        else
+            map = maploader.load("map3.tmx");
+        rander = new OrthogonalTiledMapRenderer(map, 1 /RahimulBros.PPM);
         gamecam.position.set(gameport.getWorldWidth() / 2, gameport.getWorldHeight() / 2, 0);
         this.game = game;
 
@@ -117,6 +128,10 @@ public TextureAtlas getAtlas()
     public void show() {
 
     }
+    public void handleLevel()
+    {
+        
+    }
 
     public void render(float delta) {
         update(delta);
@@ -138,6 +153,11 @@ public TextureAtlas getAtlas()
             game.setScreen(new GameOverScreen(game));
             dispose();
         }
+        if(RahimulBros.changeLevel)
+        {
+            handleLevel();
+            dispose();
+        }
 
     }
 
@@ -147,7 +167,7 @@ public TextureAtlas getAtlas()
     }
 public TiledMap getMap()
 {
-    return map;
+   return this.map;
 }
 public World getWorld()
 {
@@ -171,8 +191,11 @@ public World getWorld()
          if(player.currentState == Rahimul.State.DEAD && player.getStateTimer()>3){
              return true;
          }
+         else if(player.b2body.getPosition().y<-2)
+             return true;
          else
              return false;
+
     }
 
     public void dispose() {
