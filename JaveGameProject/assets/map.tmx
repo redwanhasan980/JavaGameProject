@@ -17,7 +17,7 @@
  </layer>
  <layer id="3" name="graphics" width="240" height="13">
   <data encoding="base64" compression="zlib">
-   eJztlr1OwzAQxz0hRtjSNv1Q36ZMIEFbmBhYYAIG2qKCBC+ABBvwFjDR8rHyDMAKIxswclFi5XpyYyd22jT1T/orH/JdLhf/7TBmsVgs88lDhbEBaFjJds5JYrJ+1Vyz3rO0yWJ/eE1RdaVd9xvkfQd9GMyfRk4VTPXKZP2quabVs1lBpz+yebFSHT3H1yo1RdU1b99Vx4OyXmVxDTdFs85YC6ldN5d73w3zx8mbJMYE287otWxecM9iWZKR5nqV57WwAx7pIvUkntl1fKlw4Yb5ZXlFNcWJmQb4Pziv67slP3DvxvFvnsH/wXld3zkNJ1qicfR/Rpc4+US18fui87yDvWv9O4r9d7ZkGepdHf9+l0JNC7qO870CH+OQlndXC4ytFfTHWJKB57nqnDcRaxKRd3X8+1kKZZLNGZjDcb12AGMPJeNVxngk6Q9fx5L+Z55J4s6rvl7rvkTgtXbcOUe1zp26ryjoPB8370V9VY2V0dDYU/BzVfwreg/qX2/PXXJDmdqDr+HZx6DbCXhYZ79T9VrUeNpnlZxef4agrQytcVleb0XzXHSP9xXPO9VYj5sg7hKOVwb6gfNEeZfWwf1D5wf1L993l11ze7D37EHwfFENHhtwrwlqJejRE8Q8g16C2LgexNBYmls2vi14RzymD8cTpNNC2J9hcIzysKweGUcQ1wF1JfGi98gKdJ7zXtL7uK+PgYfHeUR0H3v/DnSPetFH3y8OPI/Mu3QN6gXfo0e+CfU59+w68a9TZqwAKpbH1/ZTY+wX9Ffzr/ccK1Pi0PtfxeSxVowtlnxNuw7TWnD19Q+5LGfM
+   eJztlr1OwzAQxz0hRtjS75K3KRNI0BYGxMACGwy0RQUJXgAJNuAtYKLlY+UZgBVGNmDkosTK9eTGTuy0afBP+isf8l0uF//tMGaxWCz/k/sqYwPQsJrtnJPEZP2quWa9Z2mTxf7wmqLqSrvuV8j7Bno3mD+NnCqY6pXJ+lVzTatns4JOf2TzYrk2eo6vVWqKquu/fVcdD8p6lcU13BRNl7EWUts1l3trKcwfJ2+SGBNsO6PXsnnBPYtlSUaa61We18IOeKSL1JN4ZtfxpcJ5OcwvyyuqKU7MNMD/wXld3y35gXs3jn/zDP4Pzuv6zmk40RKNo/8zusTJJ6qN3xed5x3sXevfUey/syXLUO/q+PerFGpa0HWc7xX4GIe0vLtSYGy1oD/Gkgw8z1XnvIlYk4i8q+Pfj1Iok2zMwByO67V9GHsgGa8yxiNJf/g6lvQ/81QSd1bz9eL6EoHX2nHnHNU6d1xfUdB5Pm7ei/qqGiujobGn4Oeq+Ff0HtS/3p67UA5lag++gmcfgW4m4GGd/U7Va1HjaZ9Vcnr9GYI2M7TGZXm9Fc1z0T3eVzzvVGM9roO4CzheGugHzhPlXVoH9w+dH9S/fN9dLJvbg71nD4Lni2rwWId7TVArQY8eIeYJ9BzExvUghsbS3LLxbcE74jF9OB4jnRTC/gyDY5SHZfXIOIS4DqgriRe9R1ag85z3kt7HfX0IPDzOI6L72Pu3oDvUiz76fnHgeWTepWtQL/gePfJNqM+5Z9eIf50KYwVQsTK+tu86Yz+g37p/vedYmRKH3v8sJo+1Ymy+5GvadZjWXFlff/2dZ78=
   </data>
  </layer>
  <objectgroup id="4" name="ground">
@@ -124,7 +124,6 @@
   <object id="167" x="864" y="176" width="16" height="16"/>
   <object id="168" x="1919.68" y="174.575" width="16.3172" height="17.4252"/>
   <object id="169" x="2590.48" y="176.493" width="17.5153" height="15.5068"/>
-  <object id="173" x="432.28" y="175.854" width="15.7197" height="16.1463"/>
  </objectgroup>
  <objectgroup id="11" name="level">
   <object id="182" x="3573.5" y="175" width="7" height="15.5"/>

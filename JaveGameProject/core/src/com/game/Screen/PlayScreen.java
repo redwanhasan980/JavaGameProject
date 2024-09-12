@@ -6,31 +6,21 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.game.RahimulBros;
 import com.game.Scenes.Hud;
 import com.game.Sprites.Enemy;
-import com.game.Sprites.Goomba;
 import com.game.Sprites.Rahimul;
 import com.game.Tools.B2WorldCreator;
 import com.game.Tools.worldContactListener;
-
-
-import java.util.PriorityQueue;
 
 
 public class PlayScreen implements Screen
@@ -102,7 +92,7 @@ public class PlayScreen implements Screen
         else if(RahimulBros.Level==2)
             map = maploader.load("level2.tmx");
         else
-            map = maploader.load("map3.tmx");
+            map = maploader.load("level3.tmx");
         rander = new OrthogonalTiledMapRenderer(map, 1 /RahimulBros.PPM);
         gamecam.position.set(gameport.getWorldWidth() / 2, gameport.getWorldHeight() / 2, 0);
         this.game = game;
@@ -130,7 +120,18 @@ public TextureAtlas getAtlas()
     }
     public void handleLevel()
     {
-        
+        RahimulBros.Level++;
+        if(RahimulBros.Level==4)
+        {
+            game.setScreen(new lastScreen(game));
+        }
+        else
+        {
+            RahimulBros.changeLevel=false;
+            game.setScreen(new PlayScreen((RahimulBros) game));
+        }
+
+
     }
 
     public void render(float delta) {
@@ -138,7 +139,7 @@ public TextureAtlas getAtlas()
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         rander.render();
-        b2dr.render(world,gamecam.combined);
+        //b2dr.render(world,gamecam.combined);
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
@@ -148,6 +149,7 @@ public TextureAtlas getAtlas()
         game.batch.end();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+
         if(gameOver())
         {
             game.setScreen(new GameOverScreen(game));
@@ -157,6 +159,7 @@ public TextureAtlas getAtlas()
         {
             handleLevel();
             dispose();
+
         }
 
     }
@@ -187,8 +190,9 @@ public World getWorld()
 
     }
     public boolean gameOver()
-    {
-         if(player.currentState == Rahimul.State.DEAD && player.getStateTimer()>3){
+    {    if(Hud.worldTimer<0)
+        return true;
+         else if(player.currentState == Rahimul.State.DEAD && player.getStateTimer()>3){
              return true;
          }
          else if(player.b2body.getPosition().y<-2)

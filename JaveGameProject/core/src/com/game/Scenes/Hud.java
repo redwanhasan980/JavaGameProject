@@ -16,8 +16,8 @@ import com.game.RahimulBros;
 public class Hud implements Disposable {
     public Stage stage;
     private Viewport viewport;
-    private static Integer score;
-    private Integer worldTimer;
+    public static Integer score;
+    public static Integer worldTimer;
     private float timeCount;
     private static Integer life;
 
@@ -33,6 +33,7 @@ public class Hud implements Disposable {
     {
         worldTimer = 300;
         timeCount =0;
+       if(RahimulBros.Level==1)
         score=0;
         life=3
         ;
@@ -41,14 +42,23 @@ public class Hud implements Disposable {
         Table table = new Table();
         table.top();
         table.setFillParent(true);
-        countdownLabel = new Label(String.format("%03d",worldTimer),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        if(worldTimer<30)
+            countdownLabel = new Label(String.format("%03d",worldTimer),new Label.LabelStyle(new BitmapFont(), Color.RED));
+        else
+            countdownLabel = new Label(String.format("%03d",worldTimer),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
         scoreLabel= new Label(String.format("%d",score),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         showLife= new Label(String.format("%d",life),new Label.LabelStyle(new BitmapFont(), Color.RED));
         timeLabel= new Label("TIME",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         worldLabel= new Label("World",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         bananaLabel= new Label("Banana",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Lifelabel= new Label("LIFE",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        if(RahimulBros.Level==1)
         labelLabel= new Label("1-1",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        if(RahimulBros.Level==2)
+            labelLabel= new Label("1-2",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        if(RahimulBros.Level==3)
+            labelLabel= new Label("1-3",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         table.add(bananaLabel).expandX().pad(10);
         table.add(worldLabel).expandX().pad(10);
         table.add(timeLabel).expandX().pad(10);

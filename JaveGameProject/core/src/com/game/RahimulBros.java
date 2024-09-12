@@ -9,6 +9,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.game.Screen.PlayScreen;
+import com.game.Screen.startScreen;
 
 public class RahimulBros extends Game {
 public SpriteBatch batch;
@@ -28,7 +29,7 @@ public static final short MARIO_BIT=2;
 	public static boolean changeLevel =false;
 	public  static AssetManager manager;
 	public static boolean noLifeReduce=false;
-	public static int Level=1;
+	public static int Level=0;
 
 
 Texture img;
@@ -47,7 +48,7 @@ Texture img;
 		manager.load("audio/sounds/stomp.wav",Sound.class);
 		manager.load("audio/sounds/mariodie.wav",Sound.class);
 		manager.finishLoading();
-		setScreen(new PlayScreen(this));
+		setScreen(new startScreen(this));
 
 	}
 

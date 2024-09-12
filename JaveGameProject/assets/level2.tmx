@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="303">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="307">
  <tileset firstgid="1" source="Golchottor.tsx"/>
  <tileset firstgid="951" source="tileset_gutter.tsx"/>
  <layer id="1" name="Background" width="240" height="13">
@@ -9,7 +9,7 @@
  </layer>
  <layer id="2" name="Grapics" width="240" height="13">
   <data encoding="base64" compression="zlib">
-   eJztmFFKxDAQhhea6B0WBFHEU3gKL6CH8l3wDr7qDbyCHkN8MRBmTYekk6STxNL/g5+lZZsm7XybZA8HoMHP5BM7x7P0HQBAf+AvKOHJju4BCKn1N3Vti/5o8zHJAXFe4e+JF+tTglZ9U53mtNfSX+5KD39Tv09YT8jsxd/nzHFK/vJ6ko5zKblOy9+SdXkKjbkR/tazF39zyfWX6jZ1XErYDneCryVH+tvCrTubDvAcjQ9H8teYv/Sidu+z5F5s7Kk2ltrJmSvW+Kux/70386yhx/wHf2Vq/bXumluX847+akJj5p8SNXthDdb4stW150h/31w9vA+o7ZJ3Q+7uyd+Ut6Ue92YrzmlC45U+W/Dp6uCL1UKN07V7lxxq/KU1802Q3uvoGnK9jXncw2npvV1YH6BPzMsr96yv2fPmTuf4rO0v3fNo6vw9Mz7h/Evn/jNb9xe0IzbXxvzl52LXcbT9pXtK/qZqttTf7wlB5gn3saP70iuXdp4HNvZH6xMe038to/uOIGHg73b8/QX/jK1s
+   eJztmFFKxDAQhhea6B0WBFHEU3gKL6CH2vcF7+Cr3sAr6DHEFwNh1nRIOpPpNNna+eBnadmkSZpvk+xuZ2jwM8Tk7uFMfccwjPaYv0YNB9+7BUaK1N9S2SXao83HQMfI82r+nnjxMTVozW+Yp5z6lvQXu9LC39Lvk+0naLbi75HZT8pfPJ+oay415bT8rdmXl9BYG81fOVvxlwvXX5i3peta0nqwE3gv2dPfJdx68OUYkb2LwVD+OveXVkjPPlPu5fpeqmOqHs5aMcdfjfPvoxtnDi3WP/OXRuqvD2XuQy4b+qsJ9Bl/UkjOwhrM8WWte8+e/r6F+fDeYW7XvBtwd0v+lryt9bg1a3FOE+gv9bkEn2EefKG5IHFaenbhIPEX9sx3SVrvoyVwvc153MJp6r1d+RhDn5yXN2Gsb9F4Y6c5Pmv7C8/cO5m/Fy4mXX/h3jmzdn//C3gsz2G/k1trc/7ie7lyGG1/4ZmUv6VxrfX3e7BYxknPsb3b0irXfpwn1PdnH5New38tvdtusaQxf9fj7y8lEa2o
   </data>
  </layer>
  <objectgroup id="3" name="ground">
@@ -221,16 +221,14 @@
   <object id="250" x="3440" y="112" width="16" height="32"/>
   <object id="251" x="3552" y="160" width="16" height="16"/>
   <object id="279" x="1184" y="144" width="32" height="32"/>
+  <object id="305" x="2112" y="160" width="16" height="16"/>
+  <object id="306" x="2176" y="160" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="7" name="Goombas">
   <object id="274" x="480" y="160" width="16" height="16"/>
   <object id="275" x="752" y="160" width="16" height="16"/>
-  <object id="281" x="1424" y="64" width="16" height="16"/>
-  <object id="282" x="1198.67" y="126" width="16" height="16"/>
-  <object id="286" x="1600" y="160" width="16" height="16"/>
+  <object id="286" x="1905.33" y="159.333" width="16" height="16"/>
   <object id="287" x="1504" y="160" width="16" height="16"/>
-  <object id="290" x="1616" y="80" width="16" height="16"/>
-  <object id="293" x="2384" y="16" width="16" height="16"/>
   <object id="296" x="2832" y="160" width="16" height="16"/>
   <object id="297" x="2752" y="160" width="16" height="16"/>
   <object id="299" x="2992" y="160" width="16" height="16"/>
@@ -239,8 +237,10 @@
   <object id="277" x="1008" y="160" width="16" height="16"/>
   <object id="278" x="896" y="160" width="16" height="16"/>
   <object id="288" x="1280" y="160" width="16" height="16"/>
-  <object id="294" x="2544" y="160" width="16" height="16"/>
   <object id="295" x="2625.33" y="159.333" width="14.6667" height="16.6667"/>
   <object id="300" x="2320" y="160" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="9" name="Level">
+  <object id="304" x="3697.33" y="145.333" width="15.3333" height="28.6667"/>
  </objectgroup>
 </map>
