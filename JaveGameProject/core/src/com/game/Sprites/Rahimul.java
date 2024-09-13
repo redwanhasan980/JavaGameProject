@@ -41,6 +41,7 @@ public class Rahimul extends Sprite {
         this.world=screen.getWorld();
         defineRahimul();
         currentState =State.STANDING;
+        
         previousState=State.STANDING;
         stateTimer =0;
         runningRight =true;

@@ -48,7 +48,7 @@ public class startScreen implements Screen {
         table.center();
         table.setFillParent(true);
         Label gameOver = new Label("Rahimul Bros",font1);
-        Label play = new Label("Press Enter to Play",font2);
+        Label play = new Label("Tap anywhere to start",font2);
         Label Redo = new Label("REDO GAMING",font1);
         gameOver.setFontScale(3);
         Redo.setFontScale(1.7f);
@@ -66,7 +66,8 @@ public class startScreen implements Screen {
 
     @Override
     public void render(float v) {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
+        //Gdx.input.isKeyJustPressed(Input.Keys.ENTER)||
+        if(Gdx.input.isTouched())
         {   RahimulBros.Level=1;
             game.setScreen(new PlayScreen((RahimulBros) game));
             dispose();
