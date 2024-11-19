@@ -30,7 +30,7 @@ public class GameOverScreen implements Screen {
         table.center();
         table.setFillParent(true);
         Label gameOver = new Label("GAME OVER",font1);
-        Label playAgain = new Label("Press Enter to Play Again",font2);
+        Label playAgain = new Label("Tap anywhere to Play Again",font2);
         table.add(gameOver).expandX();
         table.row();
         table.add(playAgain).expandX().padTop(15f);
@@ -43,7 +43,7 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void render(float v) {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
+        if(Gdx.input.isTouched())
         {   RahimulBros.Level=1;
             game.setScreen(new PlayScreen((RahimulBros) game));
             dispose();

@@ -125,8 +125,8 @@ public class PlayScreen implements Screen {
             // Check for touch input on the left side of the screen (move left)
             for (int i = 0; i < 5; i++) {
                 if (Gdx.input.isTouched(i)) {
-                    float touchX = Gdx.input.getX();  // Get the X position of the touch
-                    float touchY = Gdx.input.getY();  // Get the Y position of the touch
+                    float touchX = Gdx.input.getX(i);  // Get the X position of the touch
+                    float touchY = Gdx.input.getY(i);  // Get the Y position of the touch
 
                     // Left side (move left)
                     if (touchX < blockX * 2 && touchX > blockX && touchY > (Gdx.graphics.getHeight() - blockY * 2) && touchY < (Gdx.graphics.getHeight() - blockY)) {
